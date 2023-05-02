@@ -1,0 +1,119 @@
+sum(X,Y):-R is X+Y,write(R). 
+
+max(X,Y,Z):-X>Y,!,Z is X ; Y>X,!,Z is Y.
+
+factorial(1,1):-!.
+factorial(N,F):-N>0,!,N1 is N-1,factorial(N1,F1),F is N*F1.
+
+
+fib(1, 0):- !.
+fib(2, 1):- !.
+fib(N, T):-
+    N > 2,
+    N1 is N - 1,
+    N2 is N1 - 1, 
+    fib(N1, T1),
+    fib(N2, T2),
+    T is T1 + T2.
+
+
+gcd(X,X,X):-!.
+gcd(X,Y,GCD):-X<Y,!, Z is Y-X, gcd(X,Z, GCD).
+gcd(X,Y,GCD):-X>Y,!, gcd(Y, X, GCD).
+
+
+pow(X,1,X):-!.
+pow(X,0,1):-!.
+pow(X,P,R):-P>=0,!,P1 is P-1,pow(X,P1,R1), R is R1*X.
+
+multiply(X,1,X):-!.
+multiply(X,P,R):-P1 is P-1, P1>0, multiply(X,P1,R1), R is R1+X.
+
+
+member(X,[X|Tail]):-!.
+member(X,[Head|Tail]):-member(X,Tail).
+
+
+conc([], L, L).
+conc([X | L1], L2, [X | L3]):-
+  conc(L1, L2, L3).
+
+
+
+
+conc([], L, L).
+conc([X|L1], L2, [X|L3]):-
+  conc(L1, L2, L3).
+
+reverse([], []).
+reverse([Head|Tail], R):-
+  reverse(Tail, L1),
+  conc(L1, [Head], R).
+
+
+conc([], L, L).
+conc([X|L1], L2, [X|L3]):-
+  conc(L1, L2, L3).
+
+palindrome([]):- !.
+palindrome([_]):- !.
+palindrome(L):-
+  conc([Head|Tail], [Head], L),
+  palindrome(Tail), !.
+
+
+sum([],0):-!.
+sum([H|T],N1):-sum(T,N), N1 is N+H.
+
+
+
+
+len([],0):-!.
+len([Head|Tail],A):-len(Tail,X), A is 1+X.
+
+evenLength(L):- len(L,C), R is mod(C,2), R=0.
+oddLength(L):- len(L,C), R is mod(C,2), R=1.
+
+
+
+nth(0,[H|_],H).
+nth(N,[H|T],X):-N=\=0,I is N-1,nth(I,T,X),!.
+
+
+
+
+maxxlist([],0).
+maxxlist([H|T],R):- maxxlist(T,R1), H > R1, R is H,!.
+maxxlist([H|T],R):- maxxlist(T,R1), H < R1, R is R1,!.
+
+maxxlist([H|T],R):- maxxlist(T,R1), H == R1, R is R1,!.
+
+
+
+
+
+insertnth(I, 1, L, [I|L]):-!.
+insertnth(I, N, [H|T], [H|R]):-N>0, N1 is N-1,insertnth(I, N1, T, R).
+
+
+
+
+deletenth(1, [_|T],T).
+deletenth(N,[H|T],[H|R]):-N>0,N1 is N-1,deletenth(N1, T, R),!.
+
+
+
+merge([],L2,L2).
+merge(L1,[],L1).
+merge([H1|T1],[H2|T2],[H1|T3]):- H1=<H2,merge(T1, [H2|T2], T3),!.
+merge([H1|T1],[H2|T2],[H2|T3]):- merge([H1|T1], T2, T3),!.
+
+
+
+
+
+
+
+
+
+
