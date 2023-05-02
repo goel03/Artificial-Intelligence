@@ -1,0 +1,22 @@
+Prolog extra:
+1. write a prolog program to implement, last element L,X where L is a list and X represents last element of the given list.
+2. write a prolog program to delete first element with predecate del_first(X,L,R) where X denotes the element whose first occurance has to be deleted from the list L to obtain the list R.
+3. delete_all(X,L,R).
+
+
+
+count([],0).
+count([_|T],R):-count(T,R1),R is 1+R1.
+last_elm(L,R):-count(L,R1),deletenth(R1,L,R),!.
+
+
+
+pos(E,[H|T],R,X):-E==H,X is R;R1 is R+1,pos(E,T,R1,X).
+deleteF(X,L,R):-pos(X,L,1,I),deletenth(I,L,R),!.
+
+
+
+
+delAll(_,[],[]).
+delAll(X,[X|T],R):-delAll(X,T,R).
+delAll(X,[H|T],[H|R]):-dif(X,H),delAll(X,T,R),!.
